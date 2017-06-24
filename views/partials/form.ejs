@@ -1,0 +1,55 @@
+<!-- Auto-insert date into the form -->
+
+<%
+  var x = data.date || new Date();
+  var timeStr = (x.getMonth() + 1) + "/" + x.getDate() + "/" + x.getFullYear(); 
+%>
+
+<!-- This form is used twice, so might as well make it modular -->
+
+<div class="form-group">
+  <label for="name">Name</label>
+  <input type="text" name="pet[name]" id="name" class="form-control" placeholder="What's his/her name?">
+</div>
+
+<label for="species">Species</label>
+<select name="pet[species]" id="species" class="form-control">
+  <option value="default" id="species_default">Please select from drop-down</option>
+  <option value="bird" id="species_bird">bird</option>
+  <option value="cat" id="species_cat">cat</option>
+  <option value="dog" id="species_dog">dog</option>
+  <option value="fish" id="species_fish">fish</option>
+  <option value="rodent" id="species_rodent">rodent</option>
+  <option value="snake" id="species_snake">snake</option>
+</select> <br>
+
+<div class="form-group">
+  <label for="age">Age</label>
+  <input type="text" name="pet[age]" id="age" class="form-control" placeholder="What's his/her age (in human years)?  Please input numbers only.">
+</div>
+
+<label for="gender">Gender</label>
+<select name="pet[gender]" id="gender" class="form-control">
+  <option value="default" id="gender_default">Please select from drop-down</option>
+  <option value="male" id="gender_male">male</option>
+  <option value="female" id="gender_female">female</option>
+</select> <br>
+
+<div class="form-group">
+  <label for="desc">Description</label>
+  <input type="text" name="pet[desc]" id="desc" class="form-control" placeholder="Please say a few things about this adoptee.">
+</div>
+
+<div class="form-group">
+  <label for="image">Image</label>
+  <input type="text" name="pet[image]" id="image" class="form-control" placeholder="Enter a URL of your image.  The image should be roughly 4 x 3 in dimension.">
+</div>
+
+<div class="form-group">
+  <label for="date">Date admitted</label>
+  <input type="text" name="pet[date]" id="date" class="form-control" value="<%= timeStr %>">
+</div>
+
+<p id="msg"></p> <!-- InnerHTML programatically added if form validation fails -->
+
+<input type=button value="Submit" class="btn btn-default" onclick="validate()" />

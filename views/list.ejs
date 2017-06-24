@@ -1,0 +1,54 @@
+<% include partials/header %>
+
+<%
+	// Showing different message depending on whether someone's logged in
+	
+	var notLoggedIn = "<p>Logging in (from link in toolbar) will permit you to modify the Mongo database, including adding, modifying and deleting adoptees. &nbsp; Otherwise, this site will remain read-only.</p>";
+
+	var loggedIn = "<p>Now logged in, you can add new adoptees from the toolbar link. &nbsp; Each individual adoptee page will provide links to edit and delete entries.</p><p>FYI, every time the root (&quot;/&quot;) is accessed, the database will revert to its original state. &nbsp; This is to ensure new visitors see the original version of this site.";
+
+	var theMsg = (currentUser)? loggedIn : notLoggedIn;
+
+	// Programatically build the filter tool
+
+			// First declare the HTML string
+
+	filterHtml = "<a href='/list'>Show all</a> | <a href='/list?s=dog'>Show dogs</a> | <a href='/list?s=cat'>Show cats</a> | <a href='/list?s=bird'>Show birds</a> | <a href='/list?s=fish'>Show fishes</a> | <a href='/list?s=rodent'>Show rodents</a> | <a href='/list?s=snake'>Show snakes</a>";
+
+			// Then modify it based on which filter has been applied.  If 'dogs' is the filtered criteria, link to 'Show dogs' should be deactivated.
+
+	if(search == "all")	{
+		modifyHtml("/list", "Show all");
+	} else if(search == "fish") {
+		modifyHtml("/list?s=fish", "Show fishes"); // The fishes search is special because "fish" plural is not "fishs"
+	} else {
+		modifyHtml("/list?s=" + search, "Show " + search + "s");
+	}
+
+	function modifyHtml(link, text){
+		filterHtml = filterHtml.replace("<a href='" + link + "'>" + text + "</a>", "<b>" + text + "</b>");
+	}
+
+%>
+
+<h2>Here are our loveable adoptees seeking a new home!</h2>
+
+	<div class="alert alert-warning" role="alert"><%- theMsg %></div>
+
+	<p><%- filterHtml %></p>
+
+<div class="container_list">
+	<div class="row">
+
+<% data.forEach(function(val){ %>
+	  <div class="col-md-2">
+	  	<a href="/list/<%= val._id %>">
+	  		<img src="<%= val.image %>" class="img-thumbnail">
+  		</a>
+		</div>
+<% }); %>
+
+	</div>
+</div>
+
+<% include partials/footer %>

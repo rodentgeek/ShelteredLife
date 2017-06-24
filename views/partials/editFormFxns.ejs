@@ -1,0 +1,13 @@
+<script>
+
+// Populate form with existing data
+
+document.querySelector("#name").value = "<%= data.name %>";
+document.querySelector("#age").value = "<%= data.age %>";
+document.querySelector("#desc").value = "<%= data.desc %>";
+document.querySelector("#image").value = "<%= data.image %>";
+document.querySelector("#image_here").innerHTML = "<img src='<%= data.image %>' class='img-thumbnail'>";
+document.querySelector("#species_<%= data.species %>").selected = true; 
+document.querySelector("#gender_<%= data.gender %>").selected = true;
+
+</script>

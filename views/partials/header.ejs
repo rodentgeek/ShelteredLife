@@ -1,0 +1,41 @@
+<%
+	// Create HTML for text links on Nav Bar programatically
+
+	function createLinks(route, glyph, text){
+		return "<a href='/" + route + "' class='bar_icons'><span class='glyphicon glyphicon-" + glyph + "'></span> " + text + "</a>";
+	}	
+
+	// Build the toolbar using above function
+
+	if(!currentUser){
+		barLinks = createLinks("login", "arrow-right", "Log-In");
+	} else {
+		barLinks = createLinks("list/new", "plus-sign", "Add Adoptee") + " " + createLinks("logout", "arrow-right", "Log-Out");
+	}
+
+	var fullBarLinks = createLinks("list", "home", "Home") + " " + barLinks;
+
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Marblebarrow Animal Shelter</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/general.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Abel|Coming+Soon" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+
+<p class="topbar"><%- fullBarLinks %></p>
+
+	<div class="jumbotron">
+		<h1>Marblebarrow Animal Shelter</h1>
+		<p>Welcome to our no-kill animal sanctuary where you may find a new family member!&nbsp; Please peruse this page, visit us and contact our staff if you wish to take home one of our loveable adoptees.</p>
+	</div>

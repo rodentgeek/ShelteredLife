@@ -1,0 +1,33 @@
+<%
+	// If log-in failed, to display a message
+
+	var failedMsg = (msg == "failed")? "<p id='msg'><br><span class='glyphicon glyphicon-remove'></span> Sorry, your inputted credentials were incorrect.</p>" : "";
+%>
+
+<% include partials/header %>
+
+<div class="inner_container">
+	<h1>Admin Log-In</h1>
+
+	<form action="/login" method="POST" class="form-inline login_form">
+<!-- 	<form action="/register" method="POST" class="form-inline login_form"> -->
+	  <div class="form-group">
+	    <label class="sr-only" for="username">Username</label>
+	    <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+	  </div>
+	  <div class="form-group">
+	    <label class="sr-only" for="password">Password</label>
+	    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+	  </div>
+
+<%- failedMsg %>
+
+	  <button type="submit" class="btn btn-default">Sign in</button>
+	</form>
+
+<br>
+	<div class="alert alert-warning" role="alert">For this demonstration app, please use "admin" and "password" as the log-in credentials.&nbsp; Authentication and sessions are being managed by the NPM package Passport.</div>
+
+</div>
+
+<% include partials/footer %>

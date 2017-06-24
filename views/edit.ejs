@@ -1,0 +1,18 @@
+<% include partials/header %>
+
+<div class="inner_container">
+
+	<h1>Edit <%= data.name %></h1>
+
+	<p id="image_here"></p>
+
+		<form action="/list/<%= data._id %>?_method=PUT" method="POST" id="theForm">
+			<% include partials/form %>
+		</form>
+
+</div>
+
+<% include partials/editFormFxns %>
+<% include partials/footer %>
+
+<script type="text/javascript" src="/scripts/formvalidate.js"></script>

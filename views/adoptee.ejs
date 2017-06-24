@@ -1,0 +1,41 @@
+<% include partials/header %>
+
+<%
+	// Get today's date and format it properly to appear on the form
+
+	var x = data.date;
+	var timeStr = (x.getMonth() + 1) + "/" + x.getDate() + "/" + x.getFullYear(); 
+
+	// Determine if the edit and delete buttons should appear based on whether someone is logged in
+	
+	var hideMe = (!currentUser)? "hideMe" : "";
+%>
+
+<div class="inner_container">
+
+	<p class="adopteeHeader">====== Meet <%= data.name %>! ======</p>
+
+	<p>
+		<img src="<%= data.image %>" class="img-full" />
+	</p>
+
+	<p>
+		<span class="toBold">Name</span> &nbsp; <span class="pet_data"><%= data.name %></span><br>
+		<span class="toBold">Species</span> &nbsp; <span class="pet_data"><%= data.species %></span><br>
+		<span class="toBold">Age (human years)</span> &nbsp; <span class="pet_data"> <%= data.age %></span><br>
+		<span class="toBold">Gender</span> &nbsp; <span class="pet_data"><%= data.gender %></span><br>
+		<span class="toBold">Description</span> &nbsp; <span class="pet_data"><%= data.desc %></span><br>
+		<span class="toBold">Date Admitted</span> &nbsp; <span class="pet_data"><%= timeStr %></span>
+	</p>
+
+	<p class="deleteBtn <%= hideMe %>">
+		<a href="/list/<%= data._id%>/edit" class="btn btn-info">Edit</a> <a onclick="document.querySelector('.deleteForm').classList.remove('deleteForm')" class="btn btn-danger">Delete</a> 
+	</p>
+
+	<form action="/list/<%= data._id %>?_method=DELETE" method="POST" class="deleteForm">
+		<button class="btn btn-danger delete-adoptee">Please click to confirm deletion</button>
+	</form>
+
+</div>
+
+<% include partials/footer %>
